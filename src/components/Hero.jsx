@@ -22,78 +22,75 @@ const quotes = [
 function ProfilePhoto() {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.85 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-      className="relative flex items-end justify-center mx-auto"
+      className="relative mx-auto"
+      style={{ width: 'min(80vw, 350px)' }}
     >
-      {/* Glow disc backdrop */}
+      {/* Soft glow backdrop */}
       <div
-        className="absolute rounded-full"
+        className="absolute -inset-6 rounded-[2.5rem]"
         style={{
-          width: '90%',
-          height: '90%',
-          bottom: '5%',
-          background: 'radial-gradient(circle at center, rgba(124,58,237,0.35) 0%, rgba(37,99,235,0.18) 40%, transparent 70%)',
-          filter: 'blur(40px)',
+          background: 'radial-gradient(circle at 50% 40%, rgba(124,58,237,0.35) 0%, rgba(37,99,235,0.18) 45%, transparent 72%)',
+          filter: 'blur(45px)',
         }}
       />
 
-      {/* Rotating gradient ring */}
+      {/* Floating portrait card */}
       <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-        className="absolute rounded-full"
-        style={{
-          width: '94%',
-          height: '94%',
-          bottom: '3%',
-          background: 'conic-gradient(from 0deg, #7c3aed, #2563eb, #06b6d4, #f59e0b, #7c3aed)',
-          opacity: 0.25,
-          filter: 'blur(2px)',
-          maskImage: 'radial-gradient(circle, transparent 60%, black 61%, black 64%, transparent 65%)',
-          WebkitMaskImage: 'radial-gradient(circle, transparent 60%, black 61%, black 64%, transparent 65%)',
-        }}
-      />
-
-      {/* Circular frame with photo */}
-      <motion.div
-        animate={{ y: [0, -12, 0] }}
+        animate={{ y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        className="relative rounded-full overflow-hidden"
-        style={{
-          width: 'min(78vw, 360px)',
-          height: 'min(78vw, 360px)',
-          border: '2px solid rgba(124,58,237,0.4)',
-          background: 'linear-gradient(160deg, rgba(124,58,237,0.12), rgba(6,182,212,0.06))',
-          boxShadow: '0 0 60px rgba(124,58,237,0.3), inset 0 0 40px rgba(6,182,212,0.08)',
-        }}
+        className="relative"
       >
-        <img
-          src="/profile.png"
-          alt="Muhammad Mussaddiq Ahmed Qureshi"
-          className="absolute left-1/2 -translate-x-1/2 select-none pointer-events-none"
-          style={{ bottom: 0, width: '108%', maxWidth: 'none', objectFit: 'contain', objectPosition: 'bottom' }}
-          draggable={false}
-        />
-      </motion.div>
-
-      {/* Floating accent badge */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1, type: 'spring' }}
-        className="absolute -bottom-2 -right-1 sm:right-2 px-4 py-2 rounded-2xl backdrop-blur-md"
-        style={{
-          background: 'rgba(10,10,26,0.8)',
-          border: '1px solid rgba(124,58,237,0.4)',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.4)',
-        }}
-      >
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs font-semibold text-white">Available for Hire</span>
+        {/* Gradient border wrapper */}
+        <div
+          className="relative rounded-[2rem] p-[2px]"
+          style={{
+            background: 'linear-gradient(150deg, rgba(124,58,237,0.9), rgba(37,99,235,0.5) 40%, rgba(6,182,212,0.7) 75%, rgba(245,158,11,0.6))',
+            boxShadow: '0 0 60px rgba(124,58,237,0.3)',
+          }}
+        >
+          {/* Inner frame holds the photo */}
+          <div
+            className="relative rounded-[1.9rem] overflow-hidden"
+            style={{
+              aspectRatio: '5 / 6',
+              background: 'linear-gradient(160deg, #161630 0%, #0c0c1f 60%, #0a0a1a 100%)',
+            }}
+          >
+            <img
+              src="/profile.png"
+              alt="Muhammad Mussaddiq Ahmed Qureshi"
+              className="absolute inset-0 w-full h-full select-none pointer-events-none"
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+              draggable={false}
+            />
+            {/* Subtle bottom fade into frame */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+              style={{ background: 'linear-gradient(to top, rgba(10,10,26,0.55), transparent)' }}
+            />
+          </div>
         </div>
+
+        {/* Floating accent badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, type: 'spring' }}
+          className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-2xl backdrop-blur-md whitespace-nowrap"
+          style={{
+            background: 'rgba(10,10,26,0.85)',
+            border: '1px solid rgba(124,58,237,0.4)',
+            boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs font-semibold text-white">Available for Hire</span>
+          </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   )
